@@ -9,6 +9,9 @@ using System.Security.Claims;
 
 namespace Prog_poe.Controllers
 {
+
+    [ApiController]
+    [Route("api/[controller]")]
     public class EventsController : Controller
     {
         public IActionResult Index()
