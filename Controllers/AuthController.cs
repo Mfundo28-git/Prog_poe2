@@ -15,7 +15,16 @@ namespace Prog_poe.Controllers
     [Route("api/[controller]")]
     public class AuthController
     {
-        //
+        private readonly ApplicationDBContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
+
+        public AuthController(
+            ApplicationDBContext context,
+            IPasswordHasher<User> passwordHasher)
+        {
+            _context = context;
+            _passwordHasher = passwordHasher;
+        }
 
     }
 }
