@@ -48,7 +48,21 @@ builder.Services
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         options.SlidingExpiration = true;
 
-       
+        // Return API status codes instead of redirecting to a login page.
+        options.Events.OnRedirectToLogin = context =>
+        {
+            context.Response.StatusCode = 401;
+            return Task.CompletedTask;
+        };
+
+        options.Events.OnRedirectToAccessDenied = context =>
+        {
+            context.Response.StatusCode = 403;
+            return Task.CompletedTask;
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
