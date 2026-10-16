@@ -1,12 +1,13 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Prog_poe.Data;
 using Prog_poe.Models;
+using System.Security.Claims;
 
 namespace Prog_poe.Controllers
 {
@@ -25,6 +26,13 @@ namespace Prog_poe.Controllers
             _context = context;
             _passwordHasher = passwordHasher;
         }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(
+            RegisterRequest request)
+
+
 
     }
 }
