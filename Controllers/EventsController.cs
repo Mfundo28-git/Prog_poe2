@@ -20,5 +20,17 @@ namespace Prog_poe.Controllers
         {
             return View();
         }
+
+        // Both roles can view all events
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetEvents()
+        {
+            var events = await _context.Events
+                .AsNoTracking()
+                .ToListAsync();
+
+            return Ok(events);
+        }
     }
 }
