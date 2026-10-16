@@ -14,6 +14,8 @@ namespace Prog_poe.Controllers
     [Route("api/[controller]")]
     public class EventsController : Controller
     {
+
+        private readonly ApplicationDBContext _context;
         public IActionResult Index()
         {
             return View();
