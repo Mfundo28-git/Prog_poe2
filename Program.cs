@@ -1,5 +1,7 @@
-using Prog_poe.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Prog_poe.Data;
+using Prog_poe.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +19,20 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Password hashing
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
+// Session support
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.SecurePolicy =
+        CookieSecurePolicy.Always;
+});
 
 
 var app = builder.Build();
