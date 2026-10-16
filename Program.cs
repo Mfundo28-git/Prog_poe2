@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Prog_poe.Data;
@@ -33,6 +34,21 @@ builder.Services.AddSession(options =>
     options.Cookie.SecurePolicy =
         CookieSecurePolicy.Always;
 });
+
+
+// Cookie authentication
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "RaceDay.Auth";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy =
+            CookieSecurePolicy.Always;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+
+       
 
 
 var app = builder.Build();
