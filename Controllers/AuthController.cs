@@ -10,7 +10,12 @@ using Prog_poe.Models;
 
 namespace Prog_poe.Controllers
 {
+
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController
     {
+        //
+
     }
 }
